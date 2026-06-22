@@ -1,0 +1,25 @@
+# Python
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.db
+backend/shekina.db
+backend/static/
+backend/uploads/
+*.pyc
+.env
+backend/.env
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

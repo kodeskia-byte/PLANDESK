@@ -1,0 +1,1154 @@
+DOCUMENTO TÉCNICO BASE
+PLATAFORMA: SHEKINA S-MART LUB
+CLIENTE / CONTEXTO: Plataforma vinculada a procesos de lubricación industrial para empresa Arauco
+CONSULTORA: KodeSK.cl
+VERSIÓN: 1.0
+FORMATO: Documento base para análisis, diseño y desarrollo de MVP
+
+
+1. OBJETIVO GENERAL
+
+Desarrollar una plataforma web tipo PWA llamada SHEKINA S-MART LUB, orientada al control, registro, trazabilidad y análisis de actividades de lubricación industrial por área y por máquina.
+
+La plataforma permitirá que los usuarios operativos registren lubricaciones en terreno, incluso sin conexión a internet, almacenando la información localmente y sincronizándola cuando vuelva la conectividad.
+
+El sistema deberá permitir la generación de reportes por área, máquina, usuario, fecha, tipo de lubricante y estado de mantención, además de KPIs generales para apoyar la toma de decisiones de supervisores e ITOs encargados.
+
+
+2. CONTEXTO DE USO
+
+La plataforma estará destinada a operaciones industriales donde existen múltiples áreas, máquinas y puntos de lubricación. Cada máquina tendrá una ficha asociada, una fotografía referencial y registros históricos de lubricación.
+
+El sistema busca reemplazar o complementar procesos manuales, planillas Excel, formularios físicos o reportes dispersos, centralizando toda la información en una solución digital accesible desde dispositivos móviles, tablets o computadores.
+
+
+3. TIPO DE PLATAFORMA
+
+La solución deberá desarrollarse como una PWA, es decir, Progressive Web App.
+
+Características esperadas:
+
+- Acceso desde navegador web.
+- Instalación en celular o tablet como aplicación.
+- Funcionamiento offline.
+- Sincronización automática cuando exista internet.
+- Interfaz responsive.
+- Uso en terreno por mecánicos lubricadores.
+- Acceso por perfiles con permisos diferenciados.
+- Almacenamiento temporal local en el dispositivo.
+- Respaldo centralizado en base de datos una vez sincronizada la información.
+
+
+4. PERFILES DE USUARIO
+
+La plataforma considera tres perfiles principales:
+
+4.1. Mecánico Lubricador
+
+Es el usuario operativo encargado de ejecutar y registrar las actividades de lubricación en terreno.
+
+Funciones principales:
+
+- Iniciar sesión mediante RUT y PIN de acceso.
+- Visualizar las áreas asignadas.
+- Seleccionar un área de trabajo.
+- Visualizar máquinas asociadas al área.
+- Ver la fotografía referencial de cada máquina.
+- Registrar una actividad de lubricación.
+- Ingresar número de orden de trabajo u OT.
+- Seleccionar máquina o equipo intervenido.
+- Seleccionar tipo de lubricante utilizado.
+- Registrar cantidad aplicada.
+- Registrar unidad de medida.
+- Agregar observaciones técnicas.
+- Adjuntar fotografía de evidencia.
+- Registrar fecha y hora automáticamente.
+- Guardar información offline cuando no exista internet.
+- Sincronizar información cuando vuelva la conectividad.
+- Consultar historial propio de registros.
+- Ver estado de sincronización de sus registros.
+- Recibir alertas de registros pendientes por sincronizar.
+
+Restricciones sugeridas:
+
+- No puede eliminar registros ya sincronizados.
+- No puede modificar reportes consolidados.
+- No puede gestionar usuarios.
+- No puede modificar áreas ni máquinas.
+- No puede validar oficialmente una mantención, salvo que se defina un flujo simple de autocierre.
+
+
+4.2. Supervisor
+
+Es el usuario encargado de revisar, validar y controlar la correcta ejecución de las lubricaciones registradas por los mecánicos.
+
+Funciones principales:
+
+- Iniciar sesión mediante RUT y PIN de acceso.
+- Visualizar áreas bajo su responsabilidad.
+- Revisar registros realizados por mecánicos lubricadores.
+- Filtrar registros por fecha, área, máquina, usuario y estado.
+- Validar registros de lubricación.
+- Rechazar o solicitar corrección de registros incompletos.
+- Revisar fotografías de evidencia.
+- Ver observaciones ingresadas por el mecánico.
+- Agregar comentarios de supervisión.
+- Consultar historial de lubricaciones por máquina.
+- Ver registros pendientes de validación.
+- Ver registros sincronizados y no sincronizados.
+- Generar reportes operativos por área.
+- Generar reportes por máquina.
+- Descargar reportes en PDF o Excel.
+- Visualizar KPIs operativos.
+- Detectar máquinas con baja frecuencia de lubricación.
+- Detectar consumo anormal de lubricantes.
+
+Restricciones sugeridas:
+
+- No puede crear usuarios administradores.
+- No puede modificar configuraciones globales del sistema.
+- Puede validar o rechazar registros de su área asignada.
+- Puede visualizar información histórica de las áreas bajo su responsabilidad.
+
+
+4.3. ITO Encargado de Área
+
+El ITO o encargado por área es el perfil con mayor responsabilidad de análisis, control y seguimiento técnico del proceso.
+
+Funciones principales:
+
+- Iniciar sesión mediante RUT y PIN de acceso.
+- Visualizar todas las áreas asignadas.
+- Consultar el estado general de lubricación por área.
+- Consultar estado general por máquina.
+- Revisar reportes consolidados.
+- Generar reportes ejecutivos por área.
+- Generar reportes ejecutivos por máquina.
+- Descargar reportes en PDF.
+- Descargar reportes en Excel.
+- Visualizar KPIs generales.
+- Analizar tendencias de mantención.
+- Revisar cumplimiento de lubricaciones planificadas.
+- Revisar consumo total de lubricantes.
+- Revisar consumo por área.
+- Revisar consumo por máquina.
+- Revisar productividad de mecánicos lubricadores.
+- Revisar validaciones realizadas por supervisores.
+- Detectar atrasos o incumplimientos.
+- Tomar decisiones basadas en evidencia.
+- Auditar trazabilidad de registros.
+- Revisar fotografías asociadas a cada intervención.
+- Exportar información para reuniones o auditorías.
+
+Restricciones sugeridas:
+
+- No necesariamente ejecuta registros de terreno.
+- No debería editar información operativa ya validada.
+- Debe tener acceso a reportes y analítica.
+- Puede tener permisos para administrar áreas y máquinas, si el modelo de negocio lo requiere.
+
+
+5. VINCULACIÓN ENTRE LOS PERFILES
+
+El flujo funcional entre perfiles se plantea de la siguiente manera:
+
+1. El Mecánico Lubricador registra la intervención en terreno.
+2. El registro queda asociado a:
+   - Usuario.
+   - RUT.
+   - Área.
+   - Máquina.
+   - Fecha.
+   - Hora.
+   - Tipo de lubricante.
+   - Cantidad.
+   - Evidencia fotográfica.
+   - Estado de sincronización.
+3. Si no hay internet, el registro queda guardado localmente.
+4. Cuando vuelve la conexión, el sistema sincroniza la información con el servidor.
+5. El Supervisor revisa los registros cargados.
+6. El Supervisor valida, rechaza o comenta el registro.
+7. El ITO revisa información consolidada.
+8. El ITO genera reportes y analiza KPIs.
+9. La información histórica queda disponible para auditorías, control de mantenimiento y análisis de tendencias.
+
+Flujo resumido:
+
+Mecánico Lubricador -> Registro en terreno -> Sincronización -> Supervisor -> Validación -> ITO -> Reportes/KPIs/Decisiones
+
+
+6. MÓDULOS PRINCIPALES DE LA PLATAFORMA
+
+6.1. Módulo de Login
+
+Objetivo:
+Permitir el acceso seguro de usuarios mediante RUT y PIN.
+
+Campos:
+
+- RUT.
+- PIN de acceso.
+- Perfil asociado.
+- Botón ingresar.
+
+Características:
+
+- Validación de RUT.
+- PIN numérico o alfanumérico.
+- Manejo de sesión.
+- Control de permisos por rol.
+- Mensajes de error.
+- Bloqueo temporal por intentos fallidos.
+- Registro de último acceso.
+- Recuperación o reinicio de PIN mediante administrador, si aplica.
+
+Perfiles disponibles en login:
+
+- Mecánico Lubricador.
+- Supervisor.
+- ITO Encargado de Área.
+
+
+6.2. Módulo de Selección de Área
+
+Objetivo:
+Permitir que el usuario seleccione el área donde realizará o consultará actividades.
+
+Funciones:
+
+- Listar áreas disponibles según perfil.
+- Mostrar nombre del área.
+- Mostrar cantidad de máquinas asociadas.
+- Mostrar estado general del área.
+- Mostrar cantidad de lubricaciones pendientes.
+- Mostrar cantidad de registros realizados.
+- Acceder al detalle del área.
+
+Ejemplos de áreas:
+
+- Área Línea 1.
+- Área Línea 2.
+- Área Secado.
+- Área Caldera.
+- Área Producción.
+- Área Mantenimiento.
+- Área Planta.
+
+
+6.3. Módulo de Máquinas por Área
+
+Objetivo:
+Gestionar y visualizar las máquinas asociadas a cada área.
+
+Funciones:
+
+- Listar máquinas de un área.
+- Mostrar fotografía de cada máquina.
+- Mostrar nombre de la máquina.
+- Mostrar código interno.
+- Mostrar TAG o identificador.
+- Mostrar estado de última lubricación.
+- Mostrar fecha de última intervención.
+- Acceder a ficha técnica de máquina.
+- Acceder al historial de lubricaciones.
+- Registrar nueva lubricación.
+
+Datos sugeridos de la máquina:
+
+- ID.
+- Nombre.
+- TAG.
+- Área.
+- Fotografía.
+- Descripción.
+- Tipo de máquina.
+- Lubricante recomendado.
+- Frecuencia recomendada.
+- Estado.
+- Fecha de creación.
+- Última actualización.
+
+
+6.4. Módulo de Registro de Lubricación
+
+Objetivo:
+Permitir registrar una actividad de lubricación de forma rápida y trazable.
+
+Campos sugeridos:
+
+- Área.
+- Máquina.
+- Fotografía referencial de máquina.
+- Número de OT.
+- Tipo de lubricante.
+- Cantidad aplicada.
+- Unidad de medida.
+- Fecha.
+- Hora.
+- Responsable.
+- Observaciones.
+- Evidencia fotográfica.
+- Estado del registro.
+- Estado de sincronización.
+
+Funciones:
+
+- Crear registro.
+- Guardar offline.
+- Sincronizar registro.
+- Adjuntar foto desde cámara.
+- Adjuntar foto desde galería.
+- Validar campos obligatorios.
+- Asociar registro al usuario conectado.
+- Asociar registro al área y máquina.
+- Generar folio o ID único.
+- Marcar registro como pendiente, sincronizado, validado o rechazado.
+
+Estados sugeridos del registro:
+
+- Borrador local.
+- Pendiente de sincronización.
+- Sincronizado.
+- Pendiente de validación.
+- Validado.
+- Rechazado.
+- Corregido.
+
+
+6.5. Módulo Offline / Sincronización
+
+Objetivo:
+Permitir que la PWA funcione sin internet y sincronice los datos posteriormente.
+
+Funciones:
+
+- Detectar conexión a internet.
+- Guardar registros localmente.
+- Guardar fotografías localmente.
+- Mostrar estado de conexión.
+- Mostrar cantidad de registros pendientes.
+- Sincronizar automáticamente.
+- Permitir sincronización manual.
+- Resolver errores de sincronización.
+- Evitar duplicidad de registros.
+- Generar identificador temporal local.
+- Confirmar carga exitosa al servidor.
+- Registrar fecha y hora de sincronización.
+
+Tecnologías sugeridas:
+
+- Service Workers.
+- IndexedDB.
+- Cache API.
+- Background Sync, si es compatible.
+- LocalStorage solo para datos menores, no para registros críticos.
+- API REST para envío al backend.
+
+Consideraciones:
+
+- Las fotos deben comprimirse antes de guardarse o enviarse.
+- El sistema debe manejar conflictos.
+- Cada registro debe tener UUID local.
+- Al sincronizar, el backend debe confirmar recepción.
+- Si falla la sincronización, el registro debe mantenerse pendiente.
+
+
+6.6. Módulo de Historial
+
+Objetivo:
+Permitir consultar registros anteriores de lubricación.
+
+Funciones:
+
+- Ver historial por usuario.
+- Ver historial por área.
+- Ver historial por máquina.
+- Filtrar por fechas.
+- Filtrar por lubricante.
+- Filtrar por estado.
+- Filtrar por supervisor.
+- Filtrar por mecánico.
+- Ver detalle de cada registro.
+- Ver fotografías asociadas.
+- Exportar historial.
+
+Campos visibles:
+
+- Fecha.
+- Hora.
+- Área.
+- Máquina.
+- OT.
+- Lubricante.
+- Cantidad.
+- Responsable.
+- Estado.
+- Supervisor validador.
+
+
+6.7. Módulo de Validación del Supervisor
+
+Objetivo:
+Permitir al supervisor revisar y validar los registros generados por los mecánicos.
+
+Funciones:
+
+- Bandeja de registros pendientes.
+- Ver detalle de registro.
+- Ver evidencia fotográfica.
+- Validar registro.
+- Rechazar registro.
+- Solicitar corrección.
+- Agregar comentario.
+- Registrar fecha y hora de validación.
+- Registrar usuario supervisor.
+- Notificar al mecánico en caso de rechazo.
+
+Estados de validación:
+
+- Pendiente.
+- Validado.
+- Rechazado.
+- Requiere corrección.
+
+
+6.8. Módulo de Reportes
+
+Objetivo:
+Generar reportes por área, máquina, fecha, usuario y estado.
+
+Tipos de reportes:
+
+- Reporte por área.
+- Reporte por máquina.
+- Reporte por usuario.
+- Reporte por rango de fechas.
+- Reporte de lubricaciones ejecutadas.
+- Reporte de lubricaciones pendientes.
+- Reporte de consumo de lubricantes.
+- Reporte de registros rechazados.
+- Reporte de trazabilidad.
+- Reporte ejecutivo para ITO.
+- Reporte operativo para supervisor.
+
+Formatos:
+
+- PDF.
+- Excel.
+- Vista web imprimible.
+
+Filtros:
+
+- Área.
+- Máquina.
+- Fecha inicio.
+- Fecha término.
+- Mecánico.
+- Supervisor.
+- Estado.
+- Tipo de lubricante.
+- OT.
+
+Contenido mínimo del reporte:
+
+- Logo o nombre de la plataforma.
+- Fecha de generación.
+- Usuario que genera el reporte.
+- Filtros aplicados.
+- Tabla de registros.
+- KPIs principales.
+- Evidencias fotográficas, opcional.
+- Resumen general.
+- Observaciones.
+
+
+6.9. Módulo de KPIs
+
+Objetivo:
+Entregar indicadores generales y específicos del proceso de lubricación.
+
+KPIs sugeridos:
+
+1. Total de lubricaciones registradas.
+2. Total de lubricaciones por área.
+3. Total de lubricaciones por máquina.
+4. Porcentaje de registros validados.
+5. Porcentaje de registros rechazados.
+6. Registros pendientes de sincronización.
+7. Registros pendientes de validación.
+8. Consumo total de lubricante.
+9. Consumo por tipo de lubricante.
+10. Consumo por área.
+11. Consumo por máquina.
+12. Máquinas con mayor cantidad de intervenciones.
+13. Máquinas con menor cantidad de intervenciones.
+14. Promedio de lubricaciones por día.
+15. Tiempo promedio entre lubricaciones por máquina.
+16. Cumplimiento de frecuencia recomendada.
+17. Ranking de áreas con más mantenciones.
+18. Ranking de mecánicos por cantidad de registros.
+19. Cantidad de registros con evidencia fotográfica.
+20. Porcentaje de registros completos.
+21. Tendencia mensual de lubricaciones.
+22. Tendencia semanal de consumo.
+23. Alertas por máquinas sin lubricación reciente.
+24. Alertas por consumo anormal.
+25. Cumplimiento general del plan de lubricación.
+
+Visualizaciones sugeridas:
+
+- Tarjetas de KPIs.
+- Gráficos de barras.
+- Gráficos de línea.
+- Gráficos de torta o dona.
+- Tablas dinámicas.
+- Semáforos de cumplimiento.
+- Ranking de máquinas.
+- Ranking de áreas.
+
+
+6.10. Módulo de Administración
+
+Objetivo:
+Permitir la gestión base de usuarios, áreas, máquinas y catálogos.
+
+Funciones:
+
+- Crear usuarios.
+- Editar usuarios.
+- Desactivar usuarios.
+- Asignar perfil.
+- Asignar áreas a usuarios.
+- Crear áreas.
+- Editar áreas.
+- Crear máquinas.
+- Editar máquinas.
+- Subir fotografía de máquina.
+- Asociar máquina a área.
+- Crear tipos de lubricantes.
+- Definir unidades de medida.
+- Definir frecuencias de lubricación.
+- Configurar parámetros generales.
+- Reiniciar PIN de usuario.
+
+Este módulo podría ser usado por un administrador general o por el ITO si se define así.
+
+
+7. MODELO DE DATOS SUGERIDO
+
+7.1. Tabla users
+
+Campos:
+
+- id
+- rut
+- nombre
+- apellido
+- pin_hash
+- rol
+- estado
+- area_id
+- created_at
+- updated_at
+- last_login
+
+Roles posibles:
+
+- mecanico
+- supervisor
+- ito
+- admin
+
+
+7.2. Tabla areas
+
+Campos:
+
+- id
+- nombre
+- descripcion
+- estado
+- created_at
+- updated_at
+
+
+7.3. Tabla machines
+
+Campos:
+
+- id
+- area_id
+- nombre
+- tag
+- codigo_interno
+- descripcion
+- foto_url
+- tipo_maquina
+- lubricante_recomendado_id
+- frecuencia_dias
+- estado
+- created_at
+- updated_at
+
+
+7.4. Tabla lubricants
+
+Campos:
+
+- id
+- nombre
+- codigo
+- descripcion
+- unidad_default
+- estado
+- created_at
+- updated_at
+
+
+7.5. Tabla lubrication_records
+
+Campos:
+
+- id
+- uuid_local
+- area_id
+- machine_id
+- user_id
+- supervisor_id
+- ot
+- lubricant_id
+- cantidad
+- unidad
+- fecha_registro
+- hora_registro
+- observaciones
+- evidencia_url
+- estado_sincronizacion
+- estado_validacion
+- comentario_supervisor
+- fecha_validacion
+- created_at
+- updated_at
+- synced_at
+
+
+7.6. Tabla sync_logs
+
+Campos:
+
+- id
+- user_id
+- record_id
+- tipo_evento
+- estado
+- mensaje
+- created_at
+
+
+7.7. Tabla audit_logs
+
+Campos:
+
+- id
+- user_id
+- accion
+- modulo
+- registro_id
+- detalle
+- ip
+- created_at
+
+
+8. ESTADOS DEL SISTEMA
+
+Estados de usuario:
+
+- Activo.
+- Inactivo.
+- Bloqueado.
+
+Estados de máquina:
+
+- Activa.
+- Inactiva.
+- En mantención.
+
+Estados de sincronización:
+
+- Local.
+- Pendiente.
+- Sincronizado.
+- Error.
+
+Estados de validación:
+
+- Pendiente.
+- Validado.
+- Rechazado.
+- Corrección solicitada.
+
+
+9. TECNOLOGÍA SUGERIDA
+
+9.1. Frontend
+
+Opción recomendada:
+
+- React.js.
+- Vite.
+- TypeScript opcional.
+- Tailwind CSS o Bootstrap.
+- PWA con Service Worker.
+- IndexedDB para almacenamiento offline.
+- Librería sugerida para IndexedDB: Dexie.js.
+- Manejo de formularios con React Hook Form.
+- Gráficos con Chart.js, Recharts o ApexCharts.
+- Generación de vistas responsivas.
+
+Alternativa:
+
+- Vue.js.
+- Angular.
+- Ionic si se quiere experiencia más cercana a app móvil.
+
+
+9.2. Backend
+
+Opción recomendada:
+
+- FastAPI con Python.
+- API REST.
+- JWT para autenticación.
+- PostgreSQL como base de datos.
+- SQLAlchemy como ORM.
+- Alembic para migraciones.
+- Pydantic para validaciones.
+
+Alternativa:
+
+- Flask.
+- Django.
+- Node.js con Express o NestJS.
+
+
+9.3. Base de Datos
+
+Recomendada:
+
+- PostgreSQL.
+
+Motivos:
+
+- Robusta.
+- Escalable.
+- Buena para reportes.
+- Compatible con despliegues cloud.
+- Permite relaciones claras entre usuarios, áreas, máquinas y registros.
+
+
+9.4. Almacenamiento de Imágenes
+
+Opciones:
+
+- Carpeta local del servidor para MVP.
+- Amazon S3.
+- Google Cloud Storage.
+- Azure Blob Storage.
+- MinIO si se quiere solución privada.
+
+Para MVP:
+
+- Guardar imágenes en backend.
+- Registrar URL en base de datos.
+
+Para producción:
+
+- Usar almacenamiento tipo S3 o equivalente.
+
+
+9.5. Autenticación
+
+Método:
+
+- RUT + PIN.
+- PIN guardado como hash, nunca en texto plano.
+- JWT o sesión segura.
+- Expiración de sesión.
+- Control de roles.
+
+Seguridad mínima:
+
+- Hash de PIN con bcrypt.
+- HTTPS.
+- Control de intentos fallidos.
+- Auditoría de accesos.
+- Tokens con expiración.
+- Validación de permisos en backend.
+
+
+10. ARQUITECTURA GENERAL
+
+Arquitectura sugerida:
+
+Frontend PWA
+|
+|-- IndexedDB para modo offline
+|-- Service Worker para cache
+|-- Sincronización cuando hay internet
+|
+Backend API REST
+|
+|-- Autenticación
+|-- Usuarios y roles
+|-- Áreas
+|-- Máquinas
+|-- Registros de lubricación
+|-- Reportes
+|-- KPIs
+|
+Base de datos PostgreSQL
+|
+Almacenamiento de imágenes
+
+
+11. FLUJO FUNCIONAL PRINCIPAL
+
+11.1. Flujo de registro de lubricación
+
+1. Usuario ingresa RUT y PIN.
+2. Sistema valida credenciales.
+3. Sistema identifica perfil.
+4. Mecánico selecciona área.
+5. Sistema muestra máquinas del área.
+6. Mecánico selecciona máquina.
+7. Sistema muestra foto de máquina.
+8. Mecánico completa formulario de lubricación.
+9. Mecánico adjunta foto de evidencia.
+10. Sistema guarda el registro.
+11. Si hay internet, el registro se envía al backend.
+12. Si no hay internet, el registro se guarda localmente.
+13. Cuando vuelve internet, el registro se sincroniza.
+14. Supervisor revisa registro.
+15. Supervisor valida o rechaza.
+16. ITO visualiza consolidado y reportes.
+
+
+11.2. Flujo de reportes
+
+1. Usuario supervisor o ITO ingresa al módulo de reportes.
+2. Selecciona filtros:
+   - Área.
+   - Máquina.
+   - Fecha.
+   - Usuario.
+   - Estado.
+3. Sistema consulta información.
+4. Sistema calcula KPIs.
+5. Sistema muestra vista previa.
+6. Usuario descarga PDF o Excel.
+
+
+11.3. Flujo offline
+
+1. Usuario abre la PWA.
+2. La PWA carga desde caché.
+3. Usuario registra lubricación.
+4. Sistema guarda datos en IndexedDB.
+5. Sistema marca registro como pendiente.
+6. Usuario recupera conexión.
+7. Sistema detecta internet.
+8. Sistema envía registros pendientes.
+9. Backend confirma recepción.
+10. PWA marca registros como sincronizados.
+
+
+12. PANTALLAS PRINCIPALES
+
+12.1. Login
+
+Elementos:
+
+- Logo SHEKINA S-MART LUB.
+- Campo RUT.
+- Campo PIN.
+- Selección o detección de perfil.
+- Botón ingresar.
+- Mensaje de error.
+- Estado de conexión.
+
+
+12.2. Dashboard Mecánico
+
+Elementos:
+
+- Bienvenida.
+- Estado de conexión.
+- Áreas asignadas.
+- Registros pendientes de sincronización.
+- Botón nueva lubricación.
+- Historial reciente.
+
+
+12.3. Dashboard Supervisor
+
+Elementos:
+
+- Total registros del día.
+- Pendientes de validación.
+- Registros rechazados.
+- Áreas supervisadas.
+- Últimos registros.
+- Acceso a reportes.
+- KPIs operativos.
+
+
+12.4. Dashboard ITO
+
+Elementos:
+
+- Resumen general por área.
+- KPIs globales.
+- Tendencias.
+- Alertas.
+- Reportes ejecutivos.
+- Ranking de máquinas.
+- Ranking de consumo.
+- Cumplimiento de lubricaciones.
+
+
+12.5. Vista de Área
+
+Elementos:
+
+- Nombre del área.
+- Máquinas asociadas.
+- Estado de cada máquina.
+- Última lubricación.
+- Acceso a historial.
+- Acceso a registro.
+
+
+12.6. Vista de Máquina
+
+Elementos:
+
+- Foto de máquina.
+- Nombre.
+- TAG.
+- Área.
+- Lubricante recomendado.
+- Frecuencia recomendada.
+- Última lubricación.
+- Historial.
+- Botón registrar lubricación.
+
+
+12.7. Formulario de Lubricación
+
+Elementos:
+
+- Área.
+- Máquina.
+- OT.
+- Lubricante.
+- Cantidad.
+- Unidad.
+- Observaciones.
+- Foto evidencia.
+- Botón guardar.
+- Indicador offline/online.
+
+
+12.8. Vista de Reportes
+
+Elementos:
+
+- Filtros.
+- Tabla de resultados.
+- KPIs.
+- Botón exportar PDF.
+- Botón exportar Excel.
+- Vista previa.
+
+
+13. REGLAS DE NEGOCIO
+
+1. Todo registro debe estar asociado a un usuario.
+2. Todo registro debe estar asociado a un área.
+3. Todo registro debe estar asociado a una máquina.
+4. Cada máquina pertenece a un área.
+5. Cada usuario puede tener una o más áreas asignadas.
+6. El mecánico solo ve sus áreas asignadas.
+7. El supervisor ve las áreas que supervisa.
+8. El ITO ve las áreas bajo su responsabilidad.
+9. Un registro offline no debe perderse.
+10. Un registro sincronizado no debe duplicarse.
+11. Todo registro debe tener fecha y hora.
+12. Todo registro debe guardar estado de sincronización.
+13. Todo registro debe guardar estado de validación.
+14. Las fotografías deben quedar asociadas al registro.
+15. Los reportes deben poder filtrarse por área y máquina.
+16. Los KPIs deben actualizarse con la información sincronizada.
+17. El PIN nunca debe guardarse en texto plano.
+18. Las acciones críticas deben guardarse en auditoría.
+
+
+14. MVP PROPUESTO
+
+El primer MVP debería incluir:
+
+- Login con RUT y PIN.
+- Roles: mecánico, supervisor, ITO.
+- Gestión básica de áreas.
+- Gestión básica de máquinas.
+- Fotografía por máquina.
+- Registro de lubricación.
+- Evidencia fotográfica.
+- Funcionamiento offline.
+- Sincronización básica.
+- Historial de registros.
+- Validación por supervisor.
+- Reportes por área.
+- Reportes por máquina.
+- Exportación a PDF.
+- Exportación a Excel.
+- Dashboard con KPIs básicos.
+
+
+15. KPIS MÍNIMOS PARA MVP
+
+- Total de lubricaciones.
+- Total por área.
+- Total por máquina.
+- Registros pendientes de validación.
+- Registros validados.
+- Registros rechazados.
+- Consumo total de lubricante.
+- Consumo por tipo de lubricante.
+- Máquinas sin lubricación reciente.
+- Registros pendientes de sincronización.
+
+
+16. FUNCIONALIDADES FUTURAS
+
+- Planificación automática de lubricaciones.
+- Calendario de mantenciones.
+- Alertas por vencimiento de lubricación.
+- Notificaciones push.
+- QR por máquina.
+- Escaneo de QR para abrir ficha de máquina.
+- Firma digital del supervisor.
+- Geolocalización del registro.
+- Integración con sistemas ERP o SAP.
+- Integración con órdenes de trabajo.
+- Módulo de inventario de lubricantes.
+- Predicción de consumo de lubricantes.
+- Inteligencia artificial para detectar anomalías.
+- Dashboard avanzado para gerencia.
+- Multiempresa.
+- Modo auditoría.
+- Reportes programados por correo.
+- App móvil nativa si el negocio lo requiere.
+
+
+17. ENDPOINTS API SUGERIDOS
+
+Autenticación:
+
+POST /auth/login
+POST /auth/logout
+POST /auth/refresh
+
+Usuarios:
+
+GET /users
+GET /users/{id}
+POST /users
+PUT /users/{id}
+DELETE /users/{id}
+
+Áreas:
+
+GET /areas
+GET /areas/{id}
+POST /areas
+PUT /areas/{id}
+
+Máquinas:
+
+GET /machines
+GET /machines/{id}
+GET /areas/{area_id}/machines
+POST /machines
+PUT /machines/{id}
+
+Lubricantes:
+
+GET /lubricants
+POST /lubricants
+PUT /lubricants/{id}
+
+Registros:
+
+GET /lubrication-records
+GET /lubrication-records/{id}
+POST /lubrication-records
+PUT /lubrication-records/{id}
+POST /lubrication-records/sync
+POST /lubrication-records/{id}/validate
+POST /lubrication-records/{id}/reject
+
+Reportes:
+
+GET /reports/area
+GET /reports/machine
+GET /reports/export/pdf
+GET /reports/export/excel
+
+KPIs:
+
+GET /kpis/general
+GET /kpis/area/{id}
+GET /kpis/machine/{id}
+
+
+18. CONSIDERACIONES DE SEGURIDAD
+
+- Usar HTTPS.
+- Guardar PIN con hash.
+- No guardar contraseñas ni PIN en texto plano.
+- Validar permisos por endpoint.
+- Registrar acciones en audit_logs.
+- Sanitizar inputs.
+- Validar tamaño y tipo de imágenes.
+- Proteger rutas por rol.
+- Controlar expiración de sesión.
+- Evitar exposición de datos sensibles.
+- Hacer backup periódico de base de datos.
+
+
+19. CONSIDERACIONES DE USABILIDAD
+
+- Interfaz simple para terreno.
+- Botones grandes.
+- Formularios cortos.
+- Indicadores claros de conexión.
+- Guardado rápido.
+- Confirmaciones visuales.
+- Menos texto, más acciones directas.
+- Vista de máquina con foto clara.
+- Filtros simples para reportes.
+- Diseño responsive.
+- Modo oscuro opcional.
+- Mensajes claros de error.
+
+
+20. RESUMEN EJECUTIVO
+
+SHEKINA S-MART LUB será una plataforma PWA para gestionar el proceso de lubricación industrial por área y máquina. Permitirá que mecánicos registren actividades en terreno con evidencia fotográfica, que supervisores validen los registros y que el ITO encargado analice reportes y KPIs.
+
+La principal ventaja técnica será su funcionamiento offline, permitiendo operar en zonas sin conectividad y sincronizar posteriormente la información. Esto entrega trazabilidad, control, evidencia, reportabilidad y análisis para mejorar la gestión de mantenciones y lubricaciones.
+
+La plataforma se recomienda construir con una arquitectura moderna basada en frontend PWA, backend API REST, base de datos PostgreSQL y almacenamiento seguro de imágenes. El MVP debe enfocarse en login por RUT/PIN, roles, áreas, máquinas, registros offline, sincronización, reportes y KPIs iniciales.
+
+Este documento sirve como base para que el equipo de Codex.cl pueda iniciar análisis técnico, diseño de arquitectura, modelamiento de datos, planificación de tareas y desarrollo del MVP.

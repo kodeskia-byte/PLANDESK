@@ -1,0 +1,55 @@
+================================================================================
+  PLANTDESK / SHEKINA — CREDENCIALES DEMO
+================================================================================
+
+URL aplicación:  http://localhost:5173
+API backend:     http://localhost:8001
+
+--------------------------------------------------------------------------------
+MECÁNICO LUBRICADOR
+--------------------------------------------------------------------------------
+Perfil en login:  Operadores → Mecánico Lubricador
+
+  Juan Pérez
+    RUT:  22.222.222-2
+    PIN:  1234
+    Áreas: Línea de Astillado, Planta de Secado
+
+  Pedro Soto
+    RUT:  55.555.555-5
+    PIN:  1234
+    Áreas: Sala de Calderas, Taller de Mantenimiento, Línea de Enrollado
+
+--------------------------------------------------------------------------------
+SUPERVISOR
+--------------------------------------------------------------------------------
+Perfil en login:  Operadores → Supervisor
+
+  María González
+    RUT:  33.333.333-3
+    PIN:  1234
+    Áreas: Todas (5 áreas)
+
+--------------------------------------------------------------------------------
+ITO ENCARGADO DEL ÁREA
+--------------------------------------------------------------------------------
+Perfil en login:  Operadores → ITO Encargado del Área
+
+  Carlos Rodríguez
+    RUT:  44.444.444-4
+    PIN:  1234
+    Áreas: Todas (5 áreas)
+
+--------------------------------------------------------------------------------
+ADMINISTRADOR
+--------------------------------------------------------------------------------
+Perfil en login:  Pestaña "Administrador" (no elegir perfil de operador)
+
+  Admin Sistema
+    RUT:  11.111.111-1
+    PIN:  admin1
+    Acceso: Total (usuarios, áreas, máquinas, lubricantes, auditoría)
+
+================================================================================
+Nota: Datos generados con backend/reseed_demo.py
+================================================================================

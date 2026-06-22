@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@theme {
+  --color-shekina-blue: #004a99;
+  --color-shekina-orange: #f39200;
+  --color-shekina-green: #4caf50;
+  --color-shekina-bg: #f1f5f9;
+  --color-brand-50: #e8f0f8;
+  --color-brand-100: #c5d9ed;
+  --color-brand-500: #004a99;
+  --color-brand-600: #003d80;
+  --color-brand-700: #004a99;
+  --color-accent: #f39200;
+  --color-success: #4caf50;
+  --color-danger: #ef4444;
+}
+
+body {
+  @apply bg-[#f1f5f9] text-slate-800 min-h-screen antialiased;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/* ── Utilidades globales modo claro ── */
+.app-card {
+  @apply bg-white rounded-2xl border border-slate-200/80 shadow-sm;
+}
+
+.app-card-hover {
+  @apply bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-[#004A99]/30 transition-all;
+}
+
+.app-page-title {
+  @apply text-xl font-bold text-slate-900;
+}
+
+.app-page-subtitle {
+  @apply text-sm text-slate-500 mt-0.5;
+}
+
+.app-section-title {
+  @apply text-xs font-semibold text-slate-400 uppercase tracking-wider;
+}
+
+.app-btn-primary {
+  @apply bg-[#004A99] hover:bg-[#003d80] text-white font-semibold px-5 py-3 rounded-xl shadow-md shadow-[#004A99]/20 transition active:scale-[0.98];
+}
+
+.app-btn-accent {
+  @apply bg-[#F39200] hover:bg-[#e08600] text-white font-semibold px-5 py-3 rounded-xl shadow-md shadow-[#F39200]/20 transition active:scale-[0.98];
+}
+
+.app-btn-outline {
+  @apply bg-white border-2 border-[#004A99] text-[#004A99] font-semibold px-5 py-3 rounded-xl hover:bg-[#004A99]/5 transition;
+}
+
+.app-btn-ghost {
+  @apply text-sm text-slate-500 hover:text-[#004A99] transition;
+}
+
+.field-input,
+.login-input {
+  @apply w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 text-base;
+  @apply focus:outline-none focus:border-[#004A99] focus:ring-2 focus:ring-[#004A99]/20 transition;
+}
+
+.app-badge-validado {
+  @apply bg-[#4CAF50]/15 text-[#2e7d32] border border-[#4CAF50]/30;
+}
+
+.app-badge-pendiente {
+  @apply bg-[#F39200]/15 text-[#e08600] border border-[#F39200]/30;
+}
+
+.app-badge-rechazado {
+  @apply bg-red-50 text-red-600 border border-red-200;
+}
+
+.app-badge-local {
+  @apply bg-slate-100 text-slate-600 border border-slate-200;
+}
+
+.app-badge-sync {
+  @apply bg-[#004A99]/10 text-[#004A99] border border-[#004A99]/20;
+}
+
+.app-empty {
+  @apply text-slate-400 text-sm bg-white rounded-2xl border border-dashed border-slate-200 p-8 text-center;
+}
+
+/* Área cards con colores del mockup */
+.area-card-blue   { @apply bg-[#004A99] text-white; }
+.area-card-green  { @apply bg-[#4CAF50] text-white; }
+.area-card-orange { @apply bg-[#F39200] text-white; }
+.area-card-slate  { @apply bg-slate-600 text-white; }
+.area-card-teal   { @apply bg-teal-600 text-white; }
+
+/* Login */
+.login-screen { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }
+
+.login-bg {
+  background-color: #e8f0f8;
+  background-image:
+    linear-gradient(
+      165deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(232, 240, 248, 0.7) 35%,
+      rgba(255, 255, 255, 0.5) 65%,
+      rgba(232, 240, 248, 0.85) 100%
+    ),
+    url('/fondo.png');
+  background-position: center, center;
+  background-size: cover, cover;
+  background-repeat: no-repeat;
+}
+
+.login-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.82) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(232, 240, 248, 0.55) 100%
+  );
+}
+
+.login-submit-btn {
+  @apply bg-[#004A99] hover:bg-[#003d80] text-white font-bold py-4 rounded-2xl text-base shadow-lg shadow-[#004A99]/25 transition-all active:scale-[0.98];
+}
+
+.login-role-card:active { transform: scale(0.99); }
+
+@keyframes slide-in-left {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.22s ease-out;
+}
