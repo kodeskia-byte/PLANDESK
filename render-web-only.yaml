@@ -1,0 +1,33 @@
+# Render Blueprint — SOLO Web Service (sin crear base de datos)
+# Usar cuando ya tienes una PostgreSQL free en Render y no puedes crear otra.
+#
+# Pasos:
+# 1. En Render Dashboard → tu PostgreSQL existente → copia "Internal Database URL"
+# 2. New → Blueprint → este archivo
+# 3. Al crear el servicio, en Environment añade manualmente:
+#    DATABASE_URL = (pega la Internal Database URL de tu BD existente)
+#
+# O crea el Web Service a mano siguiendo DEPLOY_RENDER.md sección "Despliegue manual"
+
+services:
+  - type: web
+    name: plantdesk
+    runtime: python
+    plan: free
+    buildCommand: bash scripts/render-build.sh
+    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.3"
+      # IMPORTANTE: después del deploy, pega tu Internal Database URL en Render Dashboard
+      - key: DATABASE_URL
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: SEED_DEMO
+        value: "true"
+      - key: SERVE_STATIC
+        value: "true"
+      - key: CORS_ORIGINS
+        value: "http://localhost:5173,http://127.0.0.1:5173"

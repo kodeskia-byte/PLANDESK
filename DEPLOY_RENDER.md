@@ -114,10 +114,38 @@ Si prefieres crear el servicio a mano:
    - `SERVE_STATIC` → `true`
 7. **Health Check Path:** `/api/health`
 
+## Error: "cannot have more than one active free tier database"
+
+Render **solo permite 1 base PostgreSQL gratuita activa** por cuenta. Si el Blueprint falla con ese mensaje, elige una opción:
+
+### Opción A — Borrar la BD free que no uses (recomendado si es de otro proyecto viejo)
+
+1. [dashboard.render.com](https://dashboard.render.com) → **PostgreSQL**
+2. Identifica la base que **no necesitas** (otro proyecto, prueba antigua, etc.)
+3. Abre esa BD → **Settings** → **Delete Database** (irreversible: se pierden los datos)
+4. Vuelve a desplegar el Blueprint con `render.yaml` (o **Sync** en el Blueprint existente)
+
+### Opción B — Reutilizar tu PostgreSQL existente (sin crear plantdesk-db)
+
+1. Abre tu PostgreSQL existente en Render → copia **Internal Database URL**
+2. Despliega **solo el Web Service** con `render-web-only.yaml` (no crea BD nueva)
+3. En **plantdesk → Environment** → pega `DATABASE_URL` con la URL copiada
+4. **Manual Deploy** o push al repo para redeploy
+
+También puedes crear el Web Service a mano (sección "Despliegue manual" más abajo) y omitir el paso de crear PostgreSQL.
+
+### Opción C — Plan de pago
+
+En Render, upgrade de la BD a plan **Starter** (~7 USD/mes) si necesitas **dos** bases activas a la vez.
+
+---
+
 ## Solución de problemas
 
 | Problema | Solución |
 |----------|----------|
+| `cannot have more than one active free tier database` | Ver sección arriba (Opción A, B o C) |
+| Blueprint: web service canceled | Suele ser consecuencia del fallo de la BD; arregla la BD primero y vuelve a sincronizar |
 | Login 401 | Verifica RUT/PIN; ejecuta redeploy con `SEED_DEMO=true` |
 | Login 403 bloqueado | Espera 15 min o borra usuarios bloqueados en BD |
 | Pantalla en blanco | Revisa logs de build; debe existir `backend/static/index.html` |

@@ -1,0 +1,459 @@
+================================================================================
+                    PLANTDESK — PRESENTACIÓN PARA EMPRESAS
+         Plataforma digital de control, trazabilidad y análisis de lubricación
+                              industrial inteligente
+================================================================================
+
+Versión del documento: 1.0
+Desarrollado por: KodeSK.cl (https://kodesk.cl)
+Producto: PlantDESK (también conocido como SHEKINA S-MART LUB)
+Fecha: Junio 2026
+
+
+================================================================================
+1. ¿QUÉ ES PLANTDESK?
+================================================================================
+
+PlantDESK es una plataforma web progresiva (PWA) diseñada para empresas industriales
+que necesitan controlar, registrar, trazar y analizar las actividades de lubricación
+de sus equipos y máquinas en planta.
+
+Reemplaza o complementa procesos manuales — planillas Excel, formularios en papel,
+reportes dispersos — centralizando toda la información en una solución digital
+accesible desde celulares, tablets y computadores, incluso en zonas sin conectividad.
+
+PlantDESK conecta a quienes ejecutan el trabajo en terreno con quienes supervisan
+y quienes toman decisiones estratégicas, en un flujo único, trazable y auditable.
+
+
+================================================================================
+2. PROBLEMA QUE RESUELVE
+================================================================================
+
+En operaciones industriales con múltiples áreas, máquinas y puntos de lubricación,
+es común enfrentar:
+
+  • Registros incompletos o sin evidencia fotográfica
+  • Información dispersa en papeles o archivos locales
+  • Dificultad para saber qué equipos están atrasados en su mantención
+  • Falta de visibilidad del consumo real de lubricantes
+  • Retrasos en la validación de trabajos realizados
+  • Imposibilidad de operar en terreno sin señal de internet
+  • Reportes manuales que consumen horas y generan errores
+  • Poca trazabilidad para auditorías internas o externas
+
+PlantDESK digitaliza todo el ciclo: desde el registro en terreno hasta el reporte
+ejecutivo, con evidencia, validación y KPIs en tiempo real.
+
+
+================================================================================
+3. BENEFICIOS PARA LA EMPRESA
+================================================================================
+
+OPERACIONALES
+  ✓ Registro estandarizado de lubricaciones con datos obligatorios y evidencia
+  ✓ Ruta del día inteligente: prioriza equipos atrasados y correcciones pendientes
+  ✓ Funcionamiento offline: el mecánico trabaja sin internet y sincroniza después
+  ✓ Cada máquina tiene ficha, foto referencial e historial completo
+  ✓ Control de cumplimiento por frecuencia de lubricación (al día, próximo, atrasado)
+  ✓ Flujo de corrección cuando un supervisor solicita ajustes al registro
+
+DE GESTIÓN Y SUPERVISIÓN
+  ✓ Validación formal de registros por supervisores (aprobar, rechazar, corregir)
+  ✓ Visibilidad inmediata de pendientes de validación y sincronización
+  ✓ Reportes filtrables por área, máquina, fecha y usuario
+  ✓ Exportación a PDF y Excel para reuniones, gerencia y auditorías
+  ✓ Dashboard con indicadores operativos y ejecutivos según el perfil del usuario
+
+ESTRATÉGICOS Y DE CUMPLIMIENTO
+  ✓ Trazabilidad completa: quién hizo qué, cuándo, dónde y con qué lubricante
+  ✓ Módulo de auditoría con registro de acciones críticas del sistema
+  ✓ Análisis de consumo de lubricantes por área, máquina y tipo
+  ✓ Detección de equipos sin lubricación reciente o con atraso
+  ✓ Base de datos centralizada para decisiones basadas en evidencia
+  ✓ Reducción de riesgo operacional por fallas por falta de lubricación
+
+TECNOLOGÍA Y ACCESO
+  ✓ No requiere instalación de app nativa: funciona como PWA desde el navegador
+  ✓ Se puede instalar en el dispositivo como aplicación
+  ✓ Interfaz responsive, optimizada para uso en terreno
+  ✓ Acceso seguro con RUT + PIN y roles diferenciados
+  ✓ Arquitectura moderna, escalable y desplegable en la nube
+
+
+================================================================================
+4. TIPO DE PLATAFORMA
+================================================================================
+
+PlantDESK es una Progressive Web App (PWA), lo que significa:
+
+  • Acceso desde cualquier navegador web moderno
+  • Instalable en celular o tablet como aplicación
+  • Funcionamiento offline con almacenamiento local (IndexedDB)
+  • Sincronización automática al recuperar conexión a internet
+  • Service Worker para carga rápida y experiencia fluida
+  • Diseño adaptable a pantallas móviles y de escritorio
+
+Stack tecnológico (referencia técnica):
+  Frontend:  React + TypeScript + Tailwind CSS + PWA
+  Backend:   API REST con FastAPI
+  Base de datos: PostgreSQL
+  Seguridad: JWT, PIN con hash bcrypt, HTTPS
+
+
+================================================================================
+5. PERFILES DE USUARIO — RESUMEN
+================================================================================
+
+PlantDESK contempla cuatro perfiles con permisos diferenciados:
+
+
+5.1. MECÁNICO LUBRICADOR
+────────────────────────
+Rol: Usuario operativo en terreno.
+
+Qué hace:
+  • Inicia sesión con RUT y PIN
+  • Visualiza sus áreas y máquinas asignadas
+  • Consulta la ruta del día (equipos prioritarios por turno)
+  • Registra lubricaciones con orden de trabajo (OT), lubricante, cantidad y observaciones
+  • Adjunta evidencia fotográfica en tres fases: antes, durante y después
+  • Opera sin internet; los registros se guardan localmente y se sincronizan después
+  • Consulta su historial de registros y estado de sincronización
+  • Responde a solicitudes de corrección del supervisor
+
+Qué NO hace:
+  • No valida registros de otros usuarios
+  • No administra usuarios, áreas ni máquinas
+  • No genera reportes ejecutivos
+
+
+5.2. SUPERVISOR
+───────────────
+Rol: Control y validación operativa.
+
+Qué hace:
+  • Revisa registros realizados por mecánicos de sus áreas
+  • Valida, rechaza o solicita corrección con comentarios obligatorios
+  • Filtra por área, máquina, mecánico, fecha y estado
+  • Visualiza evidencia fotográfica de cada intervención
+  • Accede a KPIs operativos del día y generales
+  • Genera y descarga reportes en PDF y Excel
+  • Monitorea cumplimiento de lubricaciones y equipos atrasados
+
+Qué NO hace:
+  • No administra la configuración global del sistema
+  • No crea usuarios administradores
+
+
+5.3. ITO ENCARGADO DEL ÁREA
+───────────────────────────
+Rol: Análisis técnico, seguimiento y toma de decisiones.
+
+Qué hace:
+  • Visualiza el estado consolidado de todas sus áreas
+  • Accede al dashboard ejecutivo con KPIs avanzados y gráficos
+  • Analiza tendencias de lubricación, consumo y cumplimiento
+  • Revisa productividad de mecánicos y validaciones de supervisores
+  • Genera reportes ejecutivos por área y máquina
+  • Exporta información para reuniones y auditorías
+  • Consulta el módulo de auditoría del sistema
+  • Accede a administración de usuarios, áreas, máquinas y lubricantes
+
+Enfoque: visión estratégica del proceso de lubricación, no ejecución en terreno.
+
+
+5.4. ADMINISTRADOR
+──────────────────
+Rol: Gestión total del sistema.
+
+Qué hace:
+  • Todo lo que puede hacer el ITO, más control administrativo completo
+  • Crear, editar y desactivar usuarios
+  • Asignar áreas a cada usuario
+  • Reiniciar PIN de acceso
+  • Gestionar áreas de trabajo
+  • Dar de alta máquinas con foto y frecuencia de lubricación
+  • Administrar catálogo de lubricantes y unidades de medida
+  • Acceder a auditoría completa del sistema
+
+Acceso: pestaña dedicada de Administrador en el login (no requiere seleccionar perfil operativo).
+
+
+================================================================================
+6. FLUJO DE TRABAJO ENTRE PERFILES
+================================================================================
+
+  Mecánico Lubricador
+        │
+        ▼
+  Registra lubricación en terreno (+ evidencia fotográfica)
+        │
+        ├── Con internet → envío inmediato al servidor
+        └── Sin internet → guardado local → sincronización automática
+        │
+        ▼
+  Supervisor
+        │
+        ├── Valida el registro
+        ├── Rechaza (con comentario)
+        └── Solicita corrección → Mecánico reenvía registro corregido
+        │
+        ▼
+  ITO / Administrador
+        │
+        ├── Consulta KPIs y dashboard ejecutivo
+        ├── Genera reportes PDF / Excel
+        └── Audita trazabilidad para decisiones y cumplimiento
+
+
+================================================================================
+7. MÓDULOS Y FUNCIONALIDADES
+================================================================================
+
+7.1. INICIO DE SESIÓN (LOGIN)
+  • Acceso con RUT chileno validado y PIN numérico
+  • Selección de perfil operativo (Mecánico, Supervisor, ITO)
+  • Acceso administrador en pestaña separada
+  • Bloqueo temporal por intentos fallidos
+  • Sesión segura con token JWT
+  • Indicador de estado de conexión (online / offline)
+
+7.2. PANEL DE INICIO (DASHBOARD)
+  • Vista personalizada según el rol del usuario
+  • Mecánico: ruta del día, registros de hoy, equipos urgentes, áreas asignadas
+  • Supervisor: KPIs del día, pendientes de validación, resumen operativo
+  • ITO/Admin: dashboard ejecutivo con indicadores consolidados
+  • Acceso rápido a áreas, historial y acciones principales
+
+7.3. RUTA DEL DÍA (PLAN DIARIO)
+  • Lista priorizada de máquinas según estado de cumplimiento:
+      - Atrasado (prioridad máxima)
+      - Sin registro
+      - Próximo vencimiento
+  • Incluye correcciones solicitadas por el supervisor
+  • Organizada por turno: mañana (06:00–13:59), tarde (14:00–21:59), noche (22:00–05:59)
+  • Enlace directo a registro o corrección de cada equipo
+
+7.4. GESTIÓN DE ÁREAS
+  • Listado de áreas asignadas al usuario
+  • Cantidad de máquinas por área
+  • Indicadores de equipos con urgencia de lubricación
+  • Detalle por área con listado de máquinas y su estado de cumplimiento
+
+7.5. FICHAS DE MÁQUINAS
+  • Nombre, código y área de cada equipo
+  • Fotografía referencial de la máquina
+  • Frecuencia de lubricación configurada (días)
+  • Estado de cumplimiento: Al día / Próximo vencimiento / Atrasado / Sin lubricación
+  • Historial de lubricaciones asociadas
+  • Acceso directo a nuevo registro desde la ficha
+
+7.6. REGISTRO DE LUBRICACIÓN
+  • Selección de área y máquina
+  • Número de orden de trabajo (OT)
+  • Tipo de lubricante (catálogo configurable)
+  • Cantidad y unidad de medida (ml, litros, gramos, etc.)
+  • Observaciones técnicas
+  • Evidencia fotográfica en 3 fases: Antes / Durante / Después
+  • Fecha y hora automáticas
+  • Modo corrección: reenvío de registro cuando el supervisor lo solicita
+  • Guardado offline con sincronización posterior
+
+7.7. HISTORIAL DE REGISTROS
+  • Consulta de todos los registros según permisos del usuario
+  • Filtros por área, máquina, fecha y estado
+  • Detalle completo de cada registro con evidencia
+  • Estados de validación y sincronización visibles
+
+7.8. VALIDACIÓN (SUPERVISOR)
+  • Bandejas: Pendientes / Corrección solicitada / Todos
+  • Filtros avanzados: área, máquina, mecánico, rango de fechas
+  • Visualización de evidencia fotográfica integrada
+  • Acciones: Validar / Rechazar / Solicitar corrección
+  • Comentarios obligatorios en rechazo y corrección
+
+7.9. REPORTES
+  • Vista previa en pantalla antes de exportar
+  • Filtros: área, máquina, fecha inicio, fecha fin
+  • Resumen de KPIs en el reporte
+  • Exportación a PDF (formato ejecutivo)
+  • Exportación a Excel (.xlsx) para análisis adicional
+  • Ideal para reuniones de mantenimiento, gerencia y auditorías
+
+7.10. KPIs Y DASHBOARD ANALÍTICO
+  Indicadores generales:
+    • Total de lubricaciones registradas
+    • Total por área y por máquina
+    • Registros pendientes de validación / validados / rechazados
+    • Registros pendientes de sincronización
+    • Consumo total de lubricante
+    • Consumo por tipo de lubricante
+    • Máquinas sin lubricación reciente
+
+  Dashboard ejecutivo (ITO/Admin):
+    • Cumplimiento global de la planta
+    • Consumo por área (gráficos)
+    • Tendencia de lubricaciones en el tiempo
+    • Ranking de áreas y mecánicos
+    • Alertas de máquinas críticas
+    • KPIs por área seleccionada
+
+7.11. AUDITORÍA
+  • Registro automático de acciones críticas del sistema
+  • Filtros por módulo: Registros, Validación, Sincronización, Acceso, Admin
+  • Trazabilidad de: logins, validaciones, sincronizaciones, cambios administrativos
+  • Fecha, hora, usuario y detalle de cada evento
+
+7.12. ADMINISTRACIÓN
+  • Usuarios: crear, editar, asignar áreas, reiniciar PIN, activar/desactivar
+  • Áreas: gestionar zonas de trabajo industriales
+  • Máquinas: alta, edición, foto, frecuencia de lubricación
+  • Lubricantes: catálogo de productos y unidades de medida
+
+7.13. MODO OFFLINE Y SINCRONIZACIÓN
+  • La PWA funciona sin conexión a internet
+  • Catálogos (áreas, máquinas, lubricantes) en caché local
+  • Registros y fotos guardados en el dispositivo
+  • Banner visual de estado de conexión
+  • Sincronización automática al detectar internet
+  • Sin duplicación de registros ya sincronizados
+
+
+================================================================================
+8. INDICADORES CLAVE (KPIs) INCLUIDOS
+================================================================================
+
+  KPI                                    DESCRIPCIÓN
+  ─────────────────────────────────────  ─────────────────────────────────────
+  Total lubricaciones                    Cantidad total de intervenciones registradas
+  Lubricaciones por área                 Distribución operativa por zona de planta
+  Lubricaciones por máquina              Frecuencia de intervención por equipo
+  Pendientes de validación               Registros esperando revisión del supervisor
+  Validados / Rechazados                 Resultado del control de calidad operativo
+  Pendientes de sincronización           Registros offline aún no enviados al servidor
+  Consumo total de lubricante            Volumen acumulado por período
+  Consumo por tipo de lubricante         Distribución de uso de productos
+  Cumplimiento por máquina               Al día / Próximo / Atrasado / Sin registro
+  Máquinas sin lubricación reciente      Equipos con más de 30 días sin intervención
+  Registros del día (supervisor)         Actividad operativa del turno actual
+  Tendencia temporal                     Evolución de lubricaciones en el tiempo
+  Ranking de áreas y mecánicos           Productividad y desempeño comparativo
+
+
+================================================================================
+9. SEGURIDAD Y CUMPLIMIENTO
+================================================================================
+
+  • Autenticación con RUT + PIN (PIN almacenado con hash bcrypt, nunca en texto plano)
+  • Tokens JWT con expiración de sesión
+  • Control de roles y permisos en frontend y backend
+  • Bloqueo temporal tras intentos fallidos de login
+  • HTTPS obligatorio en producción
+  • Auditoría de acciones críticas
+  • Cada registro incluye: usuario, RUT, fecha, hora, área, máquina, lubricante,
+    cantidad, evidencia, estado de validación y estado de sincronización
+  • Validación formal antes de considerar un registro como aprobado
+
+
+================================================================================
+10. SECTORES Y CASOS DE USO
+================================================================================
+
+PlantDESK está orientado a industrias con operaciones de mantenimiento en planta:
+
+  • Forestal y celulosa (líneas de astillado, secado, enrollado)
+  • Minería e industria pesada
+  • Manufactura y producción continua
+  • Energía (salas de calderas, turbinas)
+  • Talleres de mantenimiento industrial
+  • Cualquier operación con múltiples áreas, máquinas y rutinas de lubricación
+
+Casos de uso típicos:
+  • Control diario de rutas de lubricación por turno
+  • Auditoría de cumplimiento de plan de mantenimiento
+  • Reporte mensual de consumo de lubricantes a gerencia
+  • Trazabilidad ante incidentes o fallas de equipos
+  • Supervisión remota de trabajo en terreno
+  • Estandarización de registros entre turnos y contratistas
+
+
+================================================================================
+11. IMPLEMENTACIÓN Y DESPLIEGUE
+================================================================================
+
+PlantDESK puede desplegarse en la nube (por ejemplo, Render con PostgreSQL) o en
+infraestructura propia de la empresa. El despliegue incluye:
+
+  • Aplicación web PWA (frontend)
+  • API REST (backend)
+  • Base de datos PostgreSQL
+  • Almacenamiento de imágenes de evidencia y fotos de máquinas
+
+Proceso de implementación sugerido:
+  1. Levantamiento de áreas, máquinas y lubricantes de la planta
+  2. Carga inicial de usuarios y asignación de perfiles
+  3. Configuración de frecuencias de lubricación por equipo
+  4. Capacitación por perfil (mecánico, supervisor, ITO)
+  5. Piloto en un área y expansión progresiva
+  6. Ajuste de reportes y KPIs según necesidades de la empresa
+
+
+================================================================================
+12. ROADMAP — FUNCIONALIDADES FUTURAS
+================================================================================
+
+PlantDESK tiene una hoja de ruta de evolución que incluye:
+
+  • Planificación automática de lubricaciones con calendario
+  • Alertas por vencimiento de lubricación
+  • Notificaciones push al dispositivo
+  • Código QR por máquina para acceso rápido a la ficha
+  • Geolocalización del registro en terreno
+  • Firma digital del supervisor
+  • Integración con ERP / SAP y órdenes de trabajo
+  • Módulo de inventario de lubricantes
+  • Predicción de consumo e inteligencia artificial para anomalías
+  • Dashboard avanzado para gerencia general
+  • Soporte multiempresa
+  • Reportes programados por correo electrónico
+
+
+================================================================================
+13. RESUMEN EJECUTIVO
+================================================================================
+
+PlantDESK es la solución digital que su empresa necesita para profesionalizar
+el control de lubricación industrial.
+
+  ANTES                              CON PLANTDESK
+  ─────────────────────────────────  ─────────────────────────────────
+  Planillas y papeles                Registro digital con evidencia fotográfica
+  Sin visibilidad de atrasos         Ruta del día y alertas de cumplimiento
+  Reportes manuales                  PDF y Excel automáticos con KPIs
+  Sin trazabilidad                   Auditoría completa de cada acción
+  Terreno sin internet = sin registro Modo offline con sincronización automática
+  Validación informal                Flujo formal: validar / rechazar / corregir
+  Decisiones sin datos               Dashboard ejecutivo con indicadores reales
+
+PlantDESK conecta operaciones, supervisión y gerencia en una sola plataforma,
+reduciendo riesgos, mejorando el cumplimiento del plan de lubricación y
+entregando información confiable para la toma de decisiones.
+
+
+================================================================================
+14. CONTACTO
+================================================================================
+
+Para demos, implementación o consultas comerciales:
+
+  KodeSK.cl
+  Web: https://kodesk.cl
+
+  Solicite una demostración en vivo del sistema PlantDESK con datos de su
+  operación o con el entorno demo preconfigurado.
+
+
+================================================================================
+                              FIN DEL DOCUMENTO
+================================================================================
